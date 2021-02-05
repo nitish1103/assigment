@@ -1,0 +1,60 @@
+label.title {
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+    background: #F4F8FD;
+    color: #1B429A;
+    border: 1px solid #1B429A;
+    margin-right: 13px;
+    cursor: pointer;
+}
+
+label.title.active {
+    background: #1B429A;
+    color: white;
+}
+
+small {
+    color: #1B429A;
+}
+
+.visually-hidden {
+    position: absolute;
+    left: -100vw;
+}
+
+.header {
+    margin-bottom: 36px;
+}
+
+.profile {
+    margin: auto;
+}
+
+.image {
+    text-align: center;
+}
+
+label {
+    color: #1B429A;
+}
+
+input, textarea {
+    background-color: #F4F8FD;
+}
+
+div strong {
+    color: #1B429A;
+}
+
+button {
+    background-color: #1B429A;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    background-color: #1B429A;
+}
+
+.error {
+    color: red;
+}

@@ -1,0 +1,84 @@
+<div class="profile p-4">
+  <h5 class="header">
+    <strong>Profile Selection</strong>
+  </h5>
+
+  <div class="row">
+    <div class="col-md-7 col-lg-7 col-sm-12 col-xs-12 ">
+      <form [formGroup]="profileForm">
+        <div class="mb-3">
+          <div class="mb-2">
+            <strong>What title do you use?</strong>
+          </div>
+          <input type="hidden" formControlName="title" [value]="selectedTitle">
+          <span *ngFor="let title of titles">
+            <label for="{{title}}" class="title" [ngClass]=" title == selectedTitle ? 'active': ''" (click) = "setTitle(title)">{{title}}</label>
+          </span>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="givenName" class="form-label">Given Name</label>
+              <input type="text" class="form-control" id="givenName" formControlName="givenName">
+              <small>Enter your full name as it appears on your ID</small>
+              <p *ngIf="profileForm.get('givenName').hasError('required') && profileForm.get('givenName').touched" class="error">*Name is required</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="mb-3">
+              <label for="lastName" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="lastName" formControlName="lastName">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-6">
+            <label for="emailAddress" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress">
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-6">
+            <label for="mobile" class="form-label">Mobile / Phone Number</label>
+            <input type="number" class="form-control" id="mobile" formControlName="mobile">
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-6">
+            <label for="address" class="form-label">Address</label>
+            <textarea class="form-control" id="address" cols="10" formControlName="address"></textarea>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <div class="mb-2">
+            <strong>Are you applying with someone else?</strong>
+          </div>
+          <input type="hidden" formControlName="hasApplied" [value]="selectedOption">
+          <span *ngFor="let option of options">
+            <label for="{{option}}" class="title" [ngClass]=" option == selectedOption ? 'active': ''" (click) = "setOption(option)">{{option}}</label>
+          </span>
+        </div>
+
+        <div class="mb-3">
+          <div class="mb-2">
+            <strong>Choose your co-applicant</strong>
+          </div>
+          <input type="hidden" formControlName="coApplicant" [value]="selectedApplicant">
+          <span *ngFor="let applicant of applicants">
+            <label for="{{applicant}}" class="title" [ngClass]=" applicant == selectedApplicant ? 'active': ''" (click) = "setApplicant(applicant)">{{applicant}}</label>
+          </span>
+        </div>
+
+      <div class="mb-3">
+        <button class="btn btn-primary" [disabled]="profileForm.invalid" (click)="submit()">Submit</button>
+      </div>
+      </form>
+    </div>
+    <div class="col-5">
+      <div class="image">
+        <img src="../assets/images/image.png" height="280"> 
+      </div>
+    </div>
+  </div>
+</div>
