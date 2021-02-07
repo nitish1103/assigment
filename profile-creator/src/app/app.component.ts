@@ -24,21 +24,22 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.initializeForm();
+    this.profiles = JSON.parse(localStorage.getItem('profileList'));
+  }
+
+  initializeForm () {
     this.profileForm = this.formBuilder.group({
       givenName: ['', Validators.required],
       lastName: ['', Validators.required],
       emailAddress: ['', Validators.required],
       mobile: ['', Validators.required],
-      title: [''],
+      title: [this.selectedTitle],
       address: ['', Validators.required],
-      hasApplied: [''],
-      coApplicant: ['']
+      hasApplied: [this.selectedOption],
+      coApplicant: [this.selectedApplicant]
     });
-    this.profiles = JSON.parse(localStorage.getItem('profileList'));
-    console.log("=============38", this.profiles)
   }
-
-
 
   setTitle (title:string) {
     this.selectedTitle = title;
@@ -57,12 +58,12 @@ export class AppComponent implements OnInit {
     this.selectedApplicant = 'Amol Karve';
     this.selectedOption = 'Yes';
     this.selectedTitle = 'Mr.';
+    this.initializeForm();
   }
 
   submit() {
     this.profileService.submitProfile(this.profileForm.value);
-    this.profileForm.reset();
+    this.resetForm();
     this.profiles = JSON.parse(localStorage.getItem('profileList'));
-    console.log("========", this.profiles)
   }
 }
