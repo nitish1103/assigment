@@ -10,7 +10,7 @@
           <div class="mb-2">
             <strong>What title do you use?</strong>
           </div>
-          <input type="hidden" formControlName="title" [value]="selectedTitle">
+          <input type="hidden" formControlName="title" [(ngModel)]="selectedTitle">
           <span *ngFor="let title of titles">
             <label for="{{title}}" class="title" [ngClass]=" title == selectedTitle ? 'active': ''" (click) = "setTitle(title)">{{title}}</label>
           </span>
@@ -19,7 +19,7 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="givenName" class="form-label">Given Name</label>
-              <input type="text" class="form-control" id="givenName" formControlName="givenName">
+              <input type="text" class="form-control" id="givenName" formControlName="givenName" autocomplete="off">
               <small>Enter your full name as it appears on your ID</small>
               <p *ngIf="profileForm.get('givenName').hasError('required') && profileForm.get('givenName').touched" class="error">*Name is required</p>
             </div>
@@ -27,20 +27,20 @@
           <div class="col-6">
             <div class="mb-3">
               <label for="lastName" class="form-label">Last Name</label>
-              <input type="text" class="form-control" id="lastName" formControlName="lastName">
+              <input type="text" class="form-control" id="lastName" formControlName="lastName" autocomplete="off">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="mb-3 col-6">
             <label for="emailAddress" class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress">
+            <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress" autocomplete="off">
           </div>
         </div>
         <div class="row">
           <div class="mb-3 col-6">
             <label for="mobile" class="form-label">Mobile / Phone Number</label>
-            <input type="number" class="form-control" id="mobile" formControlName="mobile">
+            <input type="number" class="form-control" id="mobile" formControlName="mobile" autocomplete="off">
           </div>
         </div>
         <div class="row">
@@ -54,7 +54,7 @@
           <div class="mb-2">
             <strong>Are you applying with someone else?</strong>
           </div>
-          <input type="hidden" formControlName="hasApplied" [value]="selectedOption">
+          <input type="hidden" formControlName="hasApplied" [(ngModel)]="selectedOption">
           <span *ngFor="let option of options">
             <label for="{{option}}" class="title" [ngClass]=" option == selectedOption ? 'active': ''" (click) = "setOption(option)">{{option}}</label>
           </span>
@@ -64,20 +64,63 @@
           <div class="mb-2">
             <strong>Choose your co-applicant</strong>
           </div>
-          <input type="hidden" formControlName="coApplicant" [value]="selectedApplicant">
+          <input type="hidden" formControlName="coApplicant" [(ngModel)]="selectedApplicant">
           <span *ngFor="let applicant of applicants">
             <label for="{{applicant}}" class="title" [ngClass]=" applicant == selectedApplicant ? 'active': ''" (click) = "setApplicant(applicant)">{{applicant}}</label>
           </span>
         </div>
 
       <div class="mb-3">
-        <button class="btn btn-primary" [disabled]="profileForm.invalid" (click)="submit()">Submit</button>
+        <button class="btn btn-primary submit" [disabled]="profileForm.invalid" (click)="submit()">Submit</button>
       </div>
       </form>
     </div>
     <div class="col-5">
       <div class="image">
         <img src="../assets/images/image.png" height="280"> 
+      </div>
+      <div class="m-2 text-center">
+        <a href="#" data-toggle="modal" data-target="#profileModal">
+          Show Saved Profiles
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+  
+        <div class="modal-header">
+          <h4 class="modal-title">Saved Profiles</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <div class="modal-body">
+          <table class="table table-striped">
+            <thead>
+              <th>Title</th>
+              <th>Given Name</th>
+              <th>Last Name</th>
+              <th>Mobile Number</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Co Applicant</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let profile of profiles">
+                <td> {{ profile.title }}</td>
+                <td> {{ profile.givenName }}</td>
+                <td> {{ profile.lastName }}</td>
+                <td> {{ profile.mobile }}</td>
+                <td> {{ profile.emailAddress }}</td>
+                <td> {{ profile.address }}</td>
+                <td> {{ profile.coApplicant }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+  
       </div>
     </div>
   </div>
