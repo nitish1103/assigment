@@ -28,6 +28,7 @@
             <div class="mb-3">
               <label for="lastName" class="form-label">Last Name</label>
               <input type="text" class="form-control" id="lastName" formControlName="lastName" autocomplete="off">
+              <p *ngIf="profileForm.get('lastName').hasError('required') && profileForm.get('lastName').touched" class="error">*Name is required</p>
             </div>
           </div>
         </div>
@@ -35,12 +36,16 @@
           <div class="mb-3 col-6">
             <label for="emailAddress" class="form-label">Email Address</label>
             <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress" autocomplete="off">
+            <p *ngIf="profileForm.get('emailAddress').hasError('required')  && profileForm.get('emailAddress').touched" class="error">*Email is required</p>
+            <p *ngIf="profileForm.get('emailAddress').hasError('email')  && profileForm.get('emailAddress').touched" class="error">*Email is Invalid</p>
           </div>
         </div>
         <div class="row">
           <div class="mb-3 col-6">
             <label for="mobile" class="form-label">Mobile / Phone Number</label>
             <input type="number" class="form-control" id="mobile" formControlName="mobile" autocomplete="off">
+            <p *ngIf="profileForm.get('mobile').hasError('required')  && profileForm.get('mobile').touched" class="error">*Mobile Number is required</p>
+            <p *ngIf="profileForm.get('mobile').hasError('minLength')  && profileForm.get('mobile').touched" class="error">*minLength is 10</p>
           </div>
         </div>
         <div class="row">

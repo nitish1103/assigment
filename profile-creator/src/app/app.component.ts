@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
     this.profileForm = this.formBuilder.group({
       givenName: ['', Validators.required],
       lastName: ['', Validators.required],
-      emailAddress: ['', Validators.required],
-      mobile: ['', Validators.required],
+      emailAddress: ['', [Validators.required, Validators.email]],
+      mobile: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       title: [this.selectedTitle],
       address: ['', Validators.required],
       hasApplied: [this.selectedOption],
