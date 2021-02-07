@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { ProfileService } from '../providers/services/profile-services'
 
 
@@ -14,8 +13,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    GooglePlaceModule
+    ReactiveFormsModule
   ],
   providers: [ProfileService],
   bootstrap: [AppComponent]
