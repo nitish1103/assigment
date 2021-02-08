@@ -10,6 +10,7 @@ import { ProfileService } from '../providers/services/profile-services'
 })
 export class AppComponent implements OnInit {
   profileForm: FormGroup;
+  coApplicantForm: FormGroup;
   titles = ['Mr.', 'Ms.', 'Mrs.', 'Miss.', 'Dr.', 'Other'];
   options = ['Yes', 'No'];
   applicants = ['Amol Karve', 'Priyanka Ravi', 'James Cazalet'];
@@ -39,7 +40,21 @@ export class AppComponent implements OnInit {
       hasApplied: [this.selectedOption],
       coApplicant: [this.selectedApplicant]
     });
+
+    this.coApplicantForm = this.formBuilder.group({
+      coApplicantName: ['', Validators.required]
+    });
   }
+
+  formattedaddress=" "; 
+  addressOptions = { 
+    componentRestrictions:{ 
+      country:["IN"] 
+    } 
+  } 
+  public AddressChange(address: any) { 
+   this.formattedaddress=address.formatted_address 
+  } 
 
   setTitle (title:string) {
     this.selectedTitle = title;
@@ -65,5 +80,10 @@ export class AppComponent implements OnInit {
     this.profileService.submitProfile(this.profileForm.value);
     this.resetForm();
     this.profiles = JSON.parse(localStorage.getItem('profileList'));
+  }
+
+  addCoApplicant() {
+    this.applicants.push(this.coApplicantForm.value.coApplicantName);
+    this.coApplicantForm.reset();
   }
 }

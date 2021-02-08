@@ -18,7 +18,7 @@
         <div class="row">
           <div class="col-6">
             <div class="mb-3">
-              <label for="givenName" class="form-label">Given Name</label>
+              <label for="givenName" class="form-label">Given Name<sup>*</sup></label>
               <input type="text" class="form-control" id="givenName" formControlName="givenName" autocomplete="off">
               <small>Enter your full name as it appears on your ID</small>
               <p *ngIf="profileForm.get('givenName').hasError('required') && profileForm.get('givenName').touched" class="error">*Name is required</p>
@@ -26,7 +26,7 @@
           </div>
           <div class="col-6">
             <div class="mb-3">
-              <label for="lastName" class="form-label">Last Name</label>
+              <label for="lastName" class="form-label">Last Name<sup>*</sup></label>
               <input type="text" class="form-control" id="lastName" formControlName="lastName" autocomplete="off">
               <p *ngIf="profileForm.get('lastName').hasError('required') && profileForm.get('lastName').touched" class="error">*Name is required</p>
             </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="row">
           <div class="mb-3 col-6">
-            <label for="emailAddress" class="form-label">Email Address</label>
+            <label for="emailAddress" class="form-label">Email Address<sup>*</sup></label>
             <input type="email" class="form-control" id="emailAddress" formControlName="emailAddress" autocomplete="off">
             <p *ngIf="profileForm.get('emailAddress').hasError('required')  && profileForm.get('emailAddress').touched" class="error">*Email is required</p>
             <p *ngIf="profileForm.get('emailAddress').hasError('email')  && profileForm.get('emailAddress').touched" class="error">*Email is Invalid</p>
@@ -42,7 +42,7 @@
         </div>
         <div class="row">
           <div class="mb-3 col-6">
-            <label for="mobile" class="form-label">Mobile / Phone Number</label>
+            <label for="mobile" class="form-label">Mobile / Phone Number<sup>*</sup></label>
             <input type="number" class="form-control" id="mobile" formControlName="mobile" autocomplete="off">
             <p *ngIf="profileForm.get('mobile').hasError('required')  && profileForm.get('mobile').touched" class="error">*Mobile Number is required</p>
             <p *ngIf="profileForm.get('mobile').hasError('minLength')  && profileForm.get('mobile').touched" class="error">*minLength is 10</p>
@@ -50,8 +50,8 @@
         </div>
         <div class="row">
           <div class="mb-3 col-6">
-            <label for="address" class="form-label">Address</label>
-            <textarea class="form-control" id="address" cols="10" formControlName="address"></textarea>
+            <label for="address" class="form-label">Address<sup>*</sup></label>
+            <textarea class="form-control" id="address" formControlName="address"></textarea>
           </div>
         </div>
 
@@ -73,6 +73,11 @@
           <span *ngFor="let applicant of applicants">
             <label for="{{applicant}}" class="title" [ngClass]=" applicant == selectedApplicant ? 'active': ''" (click) = "setApplicant(applicant)">{{applicant}}</label>
           </span>
+          <div>
+            <a href="#" data-toggle="modal" data-target="#addCoApplicant">
+              <small>Add Co-Applicant</small>
+            </a>
+          </div>
         </div>
 
       <div class="mb-3">
@@ -124,6 +129,35 @@
               </tr>
             </tbody>
           </table>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addCoApplicant" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+  
+        <div class="modal-header">
+          <h4 class="modal-title">Add Co-Applicant</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <div class="modal-body">
+          <form [formGroup]="coApplicantForm">
+            <div class="mb-3">
+              <label for="coApplicantName" class="form-label">Co-Applicant Name<sup>*</sup></label>
+              <input type="text" class="form-control" id="coApplicantName" formControlName="coApplicantName" autocomplete="off">
+              <p *ngIf="coApplicantForm.get('coApplicantName').hasError('required')  && coApplicantForm.get('coApplicantName').touched" class="error">*Name is required</p>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <div class="mb-3">
+            <button class="btn btn-primary" [disabled]="coApplicantForm.invalid" (click)="addCoApplicant()">Submit</button>
+          </div>
         </div>
   
       </div>
